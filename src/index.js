@@ -15,7 +15,17 @@ import connectDB from "./db/index.js"
 dotenv.config({
     path: './env'
 })
+//this is an async function so it will return a promise also..so "then"
 connectDB()
+.then(()=>{
+    //yaha server start ho ga or app database k liay listen karay gi
+    app.listen(process.env.PORT ||8000,()=>{
+        console.log(`server is running ar port : ${process.env.PORT}`)
+    })
+})
+.catch((err)=>{
+    console.log(`mongodb connection faild: ${err}`)
+})
 /*
 //connecting with database
 import express from 'express'
