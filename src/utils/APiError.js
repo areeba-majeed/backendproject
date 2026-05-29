@@ -8,7 +8,7 @@ constructor(
     message="something wents wrong",
     errors=[],
     //error stack
-    statck=""
+    stack=""
 ){
     //overwriting the constructor
     super(message)
@@ -17,8 +17,8 @@ constructor(
     this.message=message
     this.success=false
     this.errors=this.errors
-    if(statck){
-        this.stack=statck
+    if(stack){
+        this.stack=stack
     }
     else{
         Error.captureStackTrace(this,this.constructor)
