@@ -2,8 +2,8 @@ import express from "express"
 import cors from "cors"
 //user k cookies ko set krna...
 import cookieParser from 'cookie-parser'
-
 const app=express()
+console.log("app created")
 //use method middleware or configurations k liay use hota hai
 //cors se hm ensure krte hain k bs hamara frontend hi backend se connect ho sakay
 //so hm origin ko select krte hain khud
@@ -25,5 +25,16 @@ app.use(express.static("public"))
 ////user k browser ki cookie access krta hai or apni cookies set kr skte hain
 //secure cookies ko user k browser mn rakhna...
 app.use(cookieParser())
-//another way to export
-export {app}
+
+
+
+//routes declaration
+//route ko laanay k liay middleware lana pary ga because router kisi or file mn hai..
+//// app.use('/users',router) //workable but not standard
+//// standard way
+import router from './routes/user.routes.js'
+
+console.log("attaching routes")
+
+app.use("/api/v1/user", router)
+export default app

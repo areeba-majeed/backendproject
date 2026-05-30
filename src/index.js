@@ -11,15 +11,18 @@ import dotenv from "dotenv"
 //importing connectedDB function 
 //using index.js because error arrises if we do not put extension
 import connectDB from "./db/index.js"
-
+import app from './app.js'
 //config dotenv
 dotenv.config({
     path: './env'
 })
-const app=express()
 //this is an async function so it will return a promise also..so "then"
 connectDB()
 .then(()=>{
+    app.on('error',(error)=>{
+        console.log('error:',error)
+        throw error
+    })
     //yaha server start ho ga or app database k liay listen karay gi
     app.listen(process.env.PORT ||8000,()=>{
         console.log(`server is running ar port : ${process.env.PORT}`)
@@ -27,6 +30,10 @@ connectDB()
 })
 .catch((err)=>{
     console.log(`mongodb connection faild: ${err}`)
+})
+
+app.get("/test", (req,res)=>{
+    res.send("WORKING")
 })
 /*
 //connecting with database
