@@ -16,3 +16,5 @@ class ApiResponse{
         //client error response (400-499)
     }
 }
+
+export default ApiResponse
